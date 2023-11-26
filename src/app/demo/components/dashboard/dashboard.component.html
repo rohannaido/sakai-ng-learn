@@ -1,5 +1,14 @@
     <div class="grid">
         <div class="col-12 lg:col-6 xl:col-3">
+            <div>Current Count: {{ count$ | async }}</div>
+
+            <button (click)="increment()">Increment</button>
+
+            <button (click)="decrement()">Decrement</button>
+
+            <button (click)="reset()">Reset Counter</button>
+        </div>
+        <!-- <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
                     <div>
@@ -13,7 +22,7 @@
                 <span class="text-green-500 font-medium">24 new </span>
                 <span class="text-500">since last visit</span>
             </div>
-        </div>
+        </div> -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">

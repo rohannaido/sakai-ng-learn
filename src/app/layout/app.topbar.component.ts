@@ -1,6 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from "./service/app.layout.service";
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { increment, decrement, reset } from '../counter.actions';
+
 
 @Component({
     selector: 'app-topbar',
@@ -16,5 +20,8 @@ export class AppTopBarComponent {
 
     @ViewChild('topbarmenu') menu!: ElementRef;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private store: Store<{ count: number }>) { 
+        this.count$ = store.select('count');
+    }
+    count$: Observable<number>
 }

@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: './formlayoutdemo.component.html'
 })
 export class FormLayoutDemoComponent {
+
+    constructor(private store: Store<{ count: number }>){
+        this.$count = store.select('count');
+    }
+
+    $count: Observable<number>;
 
     selectedState: any = null;
 

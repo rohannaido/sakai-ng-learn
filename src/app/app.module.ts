@@ -12,13 +12,17 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './counter.reducer';
+
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+        StoreModule.forRoot({ count: counterReducer }),
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

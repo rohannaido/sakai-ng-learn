@@ -5,11 +5,16 @@ import { ProductService } from '../../service/product.service';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { increment, decrement, reset } from '../../../counter.actions';
+
+
 @Component({
     templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
+    
     items!: MenuItem[];
 
     products!: Product[];
@@ -20,11 +25,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
+    constructor(private productService: ProductService, public layoutService: LayoutService, private store: Store<{ count: number }>) {
+        this.count$ = store.select('count');
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
         });
     }
+    count$: Observable<number>
+      increment() {
+        this.store.dispatch(increment());
+      }
+     
+      decrement() {
+        this.store.dispatch(decrement());
+      }
+     
+      reset() {
+        this.store.dispatch(reset());
+      }
 
     ngOnInit() {
         this.initChart();
